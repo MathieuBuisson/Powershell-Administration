@@ -13,9 +13,11 @@ PARAMETERS :
 
 ID : To specify the process by its Process ID
 
-Name : To specify all the processes which have a specific name
+Name : To specify all the processes which have a specific name.
+
 Accepts wilcards.
 
-ComputerName : Gets the thread information on the specified computers. The default is the local computer.
+ComputerName : Gets the thread information on the specified computers. 
+The default is the local computer.
 
 Type the NetBIOS name, an IP address, or a fully qualified domain name of one or more computers.
