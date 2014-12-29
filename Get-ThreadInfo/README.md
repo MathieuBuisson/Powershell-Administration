@@ -15,7 +15,7 @@ PARAMETERS :
 ID : To specify the process by its Process ID
 
 Name : To specify all the processes which have a specific name.
-Accepts wilcards.
+Accepts wildcards.
 
 ComputerName : Gets the thread information on the specified computers.
 The default is the local computer.
