@@ -7,10 +7,14 @@ It performs a non-authoritative or authoritative (if the -Authoritative paramete
 The procedure followed by this cmdlet is explained in the following article : https://support.microsoft.com/kb/2218556
 	
 This is useful in the following scenarios :
-			DFS Replication is used to replicate the Active Directory SYSVOL Share
-		    	The SYSVOL folder is empty
-			The SYSVOL share is missing (not shared) on one or more domain controllers
-			The NETLOGON share is missing (not shared) on one or more domain controllers
+
+	DFS Replication is used to replicate the Active Directory SYSVOL share
+
+	The SYSVOL folder is empty
+
+	The SYSVOL share is missing (not shared) on one or more domain controllers
+
+	The NETLOGON share is missing (not shared) on one or more domain controllers
 
 This module requires Powershell version 4 (or later), the Activedirectory module, the Dfsr module and to be run as Administrator.
 
