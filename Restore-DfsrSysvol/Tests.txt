@@ -7,7 +7,6 @@ test pipeline 2 input
 
 Add Help
 
-test [CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact="High")]
 
-http://windowsitpro.com/blog/advanced-functions-part-2-shouldprocess-your-script-cmdlets
-http://www.iheartpowershell.com/2013/05/powershell-supportsshouldprocess-worst.html
+Test "Yes"
+Test "Yes to All"
