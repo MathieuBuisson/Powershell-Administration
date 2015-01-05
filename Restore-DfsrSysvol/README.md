@@ -2,7 +2,7 @@ DESCRIPTION :
 
 This module contains one cmdlet : Restore-DfsrSysvol .
 
-Performs a non-authoritative or authoritative (if the -Authoritative parameter is used) resynchronization of DFSR replicated SYSVOL on one or more domain controllers.
+It performs a non-authoritative or authoritative (if the -Authoritative parameter is used) resynchronization of DFSR replicated SYSVOL on one or more domain controllers.
 	
 The procedure followed by this cmdlet is explained in the following article : https://support.microsoft.com/kb/2218556
 	
