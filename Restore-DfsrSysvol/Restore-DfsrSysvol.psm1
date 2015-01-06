@@ -5,8 +5,7 @@
 function Restore-DfsrSysvol {
 <#
 .SYNOPSIS
-    Performs a non-authoritative or authoritative restore of DFSR replicated SYSVOL on one or more 
-domain controllers.
+    Performs a non-authoritative or authoritative restore of DFSR replicated SYSVOL on one or more domain controllers.
 
 .DESCRIPTION
     Performs a non-authoritative or authoritative (if the -Authoritative parameter is used) resynchronization of DFSR replicated SYSVOL on one or more domain controllers.
