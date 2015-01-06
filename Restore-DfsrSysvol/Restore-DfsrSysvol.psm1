@@ -75,6 +75,13 @@ domain controllers.
 
                 Foreach ($DC in $DCToRestore) {
                     Write-Verbose "`$DC is : $DC"
+
+                    if ((Test-Connection -ComputerName $DC -Count 1 -Quiet) -eq $False) {
+                        Write-Warning "There is no connectivity to the computer $DC"
+                        Write-Warning "Skipping $DC"
+                        Continue
+                    }
+
                     $DcDN = (Get-ADDomainController -Identity $DC).ComputerObjectDN
                     Write-Verbose "`$DcDN is : $DcDN"
                     $SysvolSettingsObj = Get-ADObject "CN=SYSVOL Subscription,CN=Domain System Volume,CN=DFSR-LocalSettings,$DcDN" -Properties msDFSR-Enabled
@@ -99,6 +106,13 @@ domain controllers.
                 }
                 Foreach ($DC in $DCToRestore) {
                     Write-Verbose "`$DC is : $DC"
+
+                    if ((Test-Connection -ComputerName $DC -Count 1 -Quiet) -eq $False) {
+                        Write-Warning "There is no connectivity to the computer $DC"
+                        Write-Warning "Skipping $DC"
+                        Continue
+                    }
+
                     $DcDN = (Get-ADDomainController -Identity $DC).ComputerObjectDN
                     Write-Verbose "`$DcDN is : $DcDN"
                     $SysvolSettingsObj = Get-ADObject "CN=SYSVOL Subscription,CN=Domain System Volume,CN=DFSR-LocalSettings,$DcDN" -Properties msDFSR-Enabled
@@ -131,7 +145,7 @@ domain controllers.
                 $RefDCSysvolSettingsObj = Get-ADObject "CN=SYSVOL Subscription,CN=Domain System Volume,CN=DFSR-LocalSettings,$ReferenceDcDN" -Properties msDFSR-Enabled,msDFSR-options
                 Write-Verbose $RefDCSysvolSettingsObj
 
-                # Disabling replication of the Sysvol for each DC to restore
+                # Disabling replication of the Sysvol for the authoritative DC
                 $RefDCSysvolSettingsObj.'msDFSR-Enabled' = $False
                 $RefDCSysvolSettingsObj.'msDFSR-options' = 1
                 Set-ADObject -Instance $RefDCSysvolSettingsObj
@@ -143,6 +157,13 @@ domain controllers.
                 Foreach ($DC in $AuthoritativeExcludedDCList) {
 
                     Write-Verbose "`$DC is : $DC"
+
+                    if ((Test-Connection -ComputerName $DC -Count 1 -Quiet) -eq $False) {
+                        Write-Warning "There is no connectivity to the computer $DC"
+                        Write-Warning "Skipping $DC"
+                        Continue
+                    }
+
                     $DcDN = (Get-ADDomainController -Identity $DC).ComputerObjectDN
                     Write-Verbose "`$DcDN is : $DcDN"
                     $SysvolSettingsObj = Get-ADObject "CN=SYSVOL Subscription,CN=Domain System Volume,CN=DFSR-LocalSettings,$DcDN" -Properties msDFSR-Enabled
@@ -163,7 +184,7 @@ domain controllers.
                     }
                 }
                 Try {
-                    Invoke-Command -ComputerName $ReferenceDC -ScriptBlock { Restart-Service -Name dfsr }
+                    Invoke-Command -ComputerName $ReferenceDC -ScriptBlock { Restart-Service -Name dfsr } -ErrorAction Stop
                 }
                 Catch {
                     Write-Error $_.Exception.Message
@@ -186,8 +207,15 @@ domain controllers.
 
                 Foreach ($DC in $AuthoritativeExcludedDCList) {
                     Write-Verbose "`$DC is : $DC"
+
+                    if ((Test-Connection -ComputerName $DC -Count 1 -Quiet) -eq $False) {
+                        Write-Warning "There is no connectivity to the computer $DC"
+                        Write-Warning "Skipping $DC"
+                        Continue
+                    }
+
                     Try {
-                        Invoke-Command -ComputerName $DC -ScriptBlock { Restart-Service -Name dfsr }
+                        Invoke-Command -ComputerName $DC -ScriptBlock { Restart-Service -Name dfsr } -ErrorAction Stop
                     }
                     Catch {
                         Write-Error $_.Exception.Message
