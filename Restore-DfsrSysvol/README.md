@@ -16,7 +16,7 @@ This is useful in the following scenarios :
     
     The NETLOGON share is missing (not shared) on one or more domain controllers
 
-This module requires Powershell version 4 (or later), the Activedirectory module, the Dfsr module and to be run as Administrator.
+This module requires Powershell version 4 (or later), the _**Activedirectory**_ module, the _**Dfsr**_ module and to be run as Administrator.
 
 ###CAUTION :
 
