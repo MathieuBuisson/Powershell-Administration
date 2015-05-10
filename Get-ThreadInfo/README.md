@@ -5,7 +5,7 @@ This module contains one cmdlet : **Get-ThreadInfo**.
 It obtains detailed information on threads for the specified process(es).  
 It gives the thread ID, user CPU time, system CPU time, its scheduling state and if the thread is waiting, the wait reason. 
 
-This cmdlet expects process(es) either by ID (specified with the -ID parameter) or by name (specified with the **-Name** parameter)
+This cmdlet expects process(es) either by ID (specified with the **-ID** parameter) or by name (specified with the **-Name** parameter)
 
 Requires Powershell version 2 or later.
 
