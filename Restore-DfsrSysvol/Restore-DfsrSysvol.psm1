@@ -64,6 +64,9 @@ function Restore-DfsrSysvol {
         $ReferenceDcDN = (Get-ADDomainController -Identity $ReferenceDC).ComputerObjectDN
         $AuthoritativeExcludedDCList = Get-ADDomain | Select-Object -ExpandProperty ReplicaDirectoryServers |
         Where { $_ -ne "$ReferenceDC" }
+        
+        # Clearing the default parameter values in the function's scope
+        $PSDefaultParameterValues.Clear()
     }
 
     Process {
