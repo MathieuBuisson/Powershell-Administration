@@ -12,21 +12,18 @@
 Configuration UpdateWebSite
 {
     Import-DscResource -ModuleName "PSDesiredStateConfiguration"
+    Import-DscResource -ModuleName "cWebSiteContent"
 
     node $AllNodes.Where{$_.Role -eq "WebServer"}.NodeName
     {
-        File WebPageCopy
+        cWebSiteContent www.mat.lab
         {
-            Ensure = "Present"  # You can also set Ensure to "Absent"
-            Type = "Directory" # Default is "File".
-            Recurse = $true
-            MatchSource = $true
-            Checksum = "SHA-1"
-            SourcePath = "\\DESKTOP-IODTS6L\SiteContents"
-            DestinationPath = "C:\inetpub\wwwroot"    
-            Force = $true # To allows overwriting existing files
+            SourcePath = "C:\Users\Mathieu\Desktop\Index.html"
+            DestinationPath = "C:\inetpub\wwwroot\Index.html"
+            Checksum = 'SHA256'
+            Force = $true
+            WebAppPool = "DefaultAppPool"
         }
-
     }
 }
 
