@@ -5,6 +5,7 @@
             NodeName                   = "*"
             PsDscAllowPlainTextPassword= $True
             Role                       = "WebServer"
+            SourcePath                 = "\\DevBox\SiteContents\Index.html"
             DestinationPath            = "C:\inetpub\wwwroot\Index.html"
             Checksum                   = 'SHA256'
             Force                      = $True
@@ -33,7 +34,7 @@ Configuration UpdateWebSite
     {
         cWebSiteContent www.mat.lab
         {
-            SourcePath = "\\DevBox\SiteContents\Index.html"
+            SourcePath = $Node.SourcePath
             DestinationPath = $Node.DestinationPath
             Checksum = $Node.Checksum
             Force = $Node.Force
