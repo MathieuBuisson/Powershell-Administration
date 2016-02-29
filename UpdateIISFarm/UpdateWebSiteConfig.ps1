@@ -55,4 +55,4 @@ Configuration UpdateWebSite
 }
 
 UpdateWebSite -ConfigurationData $DevEnvironment -OutputPath "C:\DSCConfigs\UpdateWebSite" -Credential (Get-Credential)
-Start-DscConfiguration -Path "C:\DSCConfigs\UpdateWebSite" -ComputerName WebServer1,WebServer2
+Start-DscConfiguration -Path "C:\DSCConfigs\UpdateWebSite" -ComputerName WebServer1,WebServer2 -Wait -Verbose
