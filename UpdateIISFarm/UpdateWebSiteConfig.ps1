@@ -48,7 +48,7 @@ Configuration UpdateWebSite
             NodeName = "WebServer1"
             ResourceName = "[cWebSiteContent]www.mat.lab"
             RetryIntervalSec = 4
-            RetryCount = 5
+            RetryCount = 10
             PsDscRunAsCredential = $Credential
         }
     }
