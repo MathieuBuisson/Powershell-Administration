@@ -1,25 +1,42 @@
-﻿$DevEnvironment = @{
+$DevEnvironment = @{
     AllNodes = 
     @(
         @{
             NodeName = "Localhost"
+            RegFileFolder = "C:\DSCConfigs\Files\"
         }
     )
 }
 
 Configuration RemoteControls
 {
-    param()
+    param(
+        [parameter(mandatory)]
+        [ValidateNotNullOrEmpty()]
+        [PsCredential]$Credential
+    )
+    Import-DscResource -ModuleName "PSDesiredStateConfiguration"
     Import-DscResource -ModuleName "cRegFile"
 
     Node $AllNodes.NodeName
     {
+        File Test
+        {
+            DestinationPath = $($Node.RegFileFolder) + "RemotesKey.reg"
+            SourcePath = "\\DevBox\Share\RemotesKey.reg"
+            Ensure = "Present"
+            Type = "File"
+            Credential = $Credential
+            Checksum = "SHA-1"
+            Force = $true
+            MatchSource = $true
+        }
         cRegFile SupportedRemoteControls
         {
             key = "HKLM:\SYSTEM\CurrentControlSet\Services\HidIr\Remotes"
-            RegFilePath = "C:\DSCConfigs\Files\RemotesKey.reg"
+            RegFilePath = $($Node.RegFileFolder) + "RemotesKey.reg"
         }
     }
 }
-RemoteControls -ConfigurationData $DevEnvironment -OutputPath "C:\DSCConfigs\RemoteControls\"
+RemoteControls -ConfigurationData $DevEnvironment -OutputPath "C:\DSCConfigs\RemoteControls\" -Credential (Get-Credential)
 Start-DscConfiguration -Path "C:\DSCConfigs\RemoteControls" -Wait -Verbose
