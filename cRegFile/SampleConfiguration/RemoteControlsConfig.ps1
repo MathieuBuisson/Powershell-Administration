@@ -20,7 +20,7 @@ Configuration RemoteControls
 
     Node $AllNodes.NodeName
     {
-        File Test
+        File RemotesRegFile
         {
             DestinationPath = $($Node.RegFileFolder) + "RemotesKey.reg"
             SourcePath = "\\DevBox\Share\RemotesKey.reg"
@@ -35,6 +35,7 @@ Configuration RemoteControls
         {
             key = "HKLM:\SYSTEM\CurrentControlSet\Services\HidIr\Remotes"
             RegFilePath = $($Node.RegFileFolder) + "RemotesKey.reg"
+            DependsOn = "[File]RemotesRegFile"
         }
     }
 }
