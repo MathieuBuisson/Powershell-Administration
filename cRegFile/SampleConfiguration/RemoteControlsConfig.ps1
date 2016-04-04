@@ -40,4 +40,4 @@ Configuration RemoteControls
     }
 }
 RemoteControls -ConfigurationData $DevEnvironment -OutputPath "C:\DSCConfigs\RemoteControls\" -Credential (Get-Credential)
-Start-DscConfiguration -Path "C:\DSCConfigs\RemoteControls" -Wait -Verbose
+Start-DscConfiguration -Path "C:\DSCConfigs\RemoteControls" -Wait -Verbos
