@@ -15,10 +15,12 @@ build: false
 test_script:
   - ps: |
       Add-AppveyorTest -Name "PsScriptAnalyzer" -Outcome Running
-      $Result = Invoke-ScriptAnalyzer -Path $pwd -Recurse -Severity Error -ErrorAction SilentlyContinue
-      If ($Result) {
-        $ResultString = ($ScriptAnalyzer | Out-String)
-        If ($ResultString) {
+      $Results = Invoke-ScriptAnalyzer -Path $pwd -Recurse -Severity Error -ErrorAction SilentlyContinue
+      If ($Results) {
+        Foreach ($Result in $Results) {
+          $ResultString = ($Result | Out-String)
+          Write-Host "Trying to write ResultString within the foreach loop"
+          $ResultString
           Write-Host "Trying within the if"
           Write-Host $ResultString
         }
