@@ -16,8 +16,6 @@ test_script:
   - ps: |
       Add-AppveyorTest -Name "PsScriptAnalyzer" -Outcome Running
       $Result = Invoke-ScriptAnalyzer -Path $pwd -Recurse -Severity Error -ErrorAction SilentlyContinue
-      Write-Host "Result"
-      $Result
       If ($Result) {
         $ResultString = $ScriptAnalyzer | Out-String
         Write-Host "ResultString"
