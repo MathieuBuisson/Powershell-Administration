@@ -18,10 +18,12 @@ test_script:
       $Results = Invoke-ScriptAnalyzer -Path $pwd -Recurse -Severity Error -ErrorAction SilentlyContinue
       If ($Results) {
         $ResultString = $Results | Out-String
-        $ResultString
+        Write-Warning $ResultString
         Add-AppveyorMessage -Message "PSScriptAnalyzer output contained one or more result(s) with 'Error' severity.`
         Check the 'Tests' tab of this build for more details." -Category Error
         Update-AppveyorTest -Name "PsScriptAnalyzer" -Outcome Failed -ErrorMessage $ResultString
+        # Exiting the host with code not equal to zero to fail the build
+        $Host.SetShouldExit(1)
       }
       Else {
         Update-AppveyorTest -Name "PsScriptAnalyzer" -Outcome Passed
