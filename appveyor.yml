@@ -17,7 +17,7 @@ test_script:
       Add-AppveyorTest -Name "PsScriptAnalyzer" -Outcome Running
       $Result = Invoke-ScriptAnalyzer -Path $pwd -Recurse -Severity Error -ErrorAction SilentlyContinue
       If ($Result) {
-        $ResultString = $ScriptAnalyzer | Out-String
+        $ResultString = ($ScriptAnalyzer | Out-String)
         If ($ResultString) {
           Write-Host "Trying within the if"
           Write-Host $ResultString
