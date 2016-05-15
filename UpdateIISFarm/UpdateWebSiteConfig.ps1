@@ -30,28 +30,28 @@ Configuration UpdateWebSite
     Import-DscResource -ModuleName "PSDesiredStateConfiguration"
     Import-DscResource -ModuleName "cWebSiteContent"
 
-    Node $AllNodes.Where{$_.Role -eq "WebServer"}.NodeName
-    {
-        cWebSiteContent www.mat.lab
-        {
-            SourcePath = $Node.SourcePath
-            DestinationPath = $Node.DestinationPath
-            Checksum = $Node.Checksum
-            Force = $Node.Force
-            WebAppPool = $Node.WebAppPool
-        }
-    }
-    Node WebServer2
-    {
-        WaitForAll WaitForWebServer1
-        {
-            NodeName = "WebServer1"
-            ResourceName = "[cWebSiteContent]www.mat.lab"
-            RetryIntervalSec = 4
-            RetryCount = 10
-            PsDscRunAsCredential = $Credential
-        }
-    }
+   # Node $AllNodes.Where{$_.Role -eq "WebServer"}.NodeName
+   # {
+   #     cWebSiteContent www.mat.lab
+   #     {
+   #         SourcePath = $Node.SourcePath
+   #         DestinationPath = $Node.DestinationPath
+   #         Checksum = $Node.Checksum
+   #         Force = $Node.Force
+   #         WebAppPool = $Node.WebAppPool
+   #     }
+   # }
+   # Node WebServer2
+   # {
+   #     WaitForAll WaitForWebServer1
+   #     {
+   #         NodeName = "WebServer1"
+   #         ResourceName = "[cWebSiteContent]www.mat.lab"
+   #         RetryIntervalSec = 4
+   #         RetryCount = 10
+   #         PsDscRunAsCredential = $Credential
+   #     }
+   # }
 }
 
 UpdateWebSite -ConfigurationData $DevEnvironment -OutputPath "C:\DSCConfigs\UpdateWebSite" -Credential (Get-Credential)
