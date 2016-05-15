@@ -28,7 +28,7 @@ Configuration UpdateWebSite
         [PsCredential]$Credential
     )
     Import-DscResource -ModuleName "PSDesiredStateConfiguration"
-    Import-DscResource -ModuleName "cWebSiteContent"
+   # Import-DscResource -ModuleName "cWebSiteContent"
 
    # Node $AllNodes.Where{$_.Role -eq "WebServer"}.NodeName
    # {
