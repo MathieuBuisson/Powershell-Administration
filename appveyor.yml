@@ -24,7 +24,7 @@ test_script:
         Update-AppveyorTest -Name "PsScriptAnalyzer" -Outcome Failed -ErrorMessage $ResultString
         
         # Failing the build
-        Throw
+        Throw "Build failed"
       }
       Else {
         Update-AppveyorTest -Name "PsScriptAnalyzer" -Outcome Passed
